@@ -30,11 +30,11 @@ const userSchema = new mongoose.Schema({
     },
     userStatus : {
         type : String,
-        enum : ["APPORVED", "PENDING", "BLOCKED"],
+        enum : ["APPROVED", "PENDING", "BLOCKED"],
         required : true,
         default : "APPROVED"
     }
 },{timeseries : true, versionKey : false});
 
-module.exports = mongoose.model("User", "userSchema")
+module.exports = mongoose.model("User", userSchema)
 
