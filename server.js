@@ -35,7 +35,7 @@ async function init() {
 }
 
 
-const PORT = process.env.PORT || 7777
+const PORT = process.env.PORT || 7777;
 console.log(process.env.PORT)
 app.listen(PORT, () => {
     console.log(`Server is listening to the port num : ${PORT}`)
