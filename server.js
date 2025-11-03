@@ -35,6 +35,8 @@ async function init() {
 }
 
 
+// Starting the Server
+
 const PORT = process.env.PORT || 7777;
 console.log(process.env.PORT)
 app.listen(PORT, () => {
