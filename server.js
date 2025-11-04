@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 require('dotenv').config();
 const User = require("./models/user.model");
 const bcryptjs = require("bcryptjs");
+app.use(express.json());
+
 
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/CRM')
@@ -33,6 +35,14 @@ async function init() {
         console.log("Admin user is already present")
     }
 }
+
+// Stich the auth route
+
+const auth_route = require("./routes/auth.routes");
+app.use("/crm/api/v1", auth_route);
+
+
+
 
 
 // Starting the Server
