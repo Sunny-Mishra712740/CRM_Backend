@@ -1,16 +1,17 @@
 const mongoose = require("mongoose");
 const User = require("../models/user.model");
 const bcrypt = require("bcryptjs")
+const constants = require("../utils/constants")
 // Logic to the Signup ---.> Customer(A) | Engineer(P) | Admin(P)
 
 exports.signUp = async (req, res) => {
 
     let userStatus = req.body.userStatus;
 
-    if(!req.body.userType || req.body.userType == "CUSTOMER"){
-        userStatus = "APPROVED";
+    if(!req.body.userType || req.body.userType == constants.userTypes.customer){
+        userStatus = constants.userStatus.approved;
     }else {
-        userStatus = "PENDING";
+        userStatus = constants.userStatus.pending;
     }
 
 
