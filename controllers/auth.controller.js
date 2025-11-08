@@ -49,10 +49,10 @@ exports.signUp = async (req, res) => {
 }
 
 exports.signIn = async(req, res) => {
-    
+
 
     try {
-        const user = User.findOne({userId : req.body.userId})
+        const user = awaitUser.findOne({userId : req.body.userId})
         if (user == null) {
             res.status(503).send({
                 message : `User Id  passed : ${req.body.userId} not correct`

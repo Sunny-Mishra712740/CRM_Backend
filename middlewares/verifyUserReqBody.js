@@ -1,75 +1,79 @@
 const User = require("../models/user.model");
 const constants = require("../utils/constants");
 
-const validateUserRequestBody = (req, res, next) => {
+const validateUserRequestBody = async (req, res, next) => {
   try {
-    // Validate the userName
+    // Validate name
     if (!req.body.name) {
-      res.status(400).send({
-        message: "Failed ! Bad Request, userName field is not passed or empty",
+      return res.status(400).send({
+        message: "Failed! Bad Request, name field is not passed or empty",
       });
-      return;
     }
 
-    // Validate the userId
+    // Validate userId
     if (!req.body.userId) {
-      res.status(500).send({
-        message: "User id is not Present",
+      return res.status(400).send({
+        message: "Failed! Bad Request, userId field is not passed or empty",
       });
-      return;
-    }
-    // Let's check if the user id is already present
-    const user = User.findOne({ userId: req.body.userId });
-    if (user != null) {
-      res.status(400).send({
-        message:
-          "Failed ! Bad Request, userId field is already registered, Please change and try",
-      });
-      return;
-    }
-    // Check for email
-    if (!req.body.email) {
-      res.status(500).send({
-        message: "Failed ! Bad Request, Email field is not passed or empty",
-      });
-      return;
-    }
-    // Let's check if email id is unique or not
-    const user1 = User.findOne({ email: req.body.email });
-    if (email != null) {
-      res.status(400).send({
-        message:
-          "Failed ! Bad Request, email id field is already registered, Please change and try",
-      });
-      return;
     }
 
-    // Validating the userType
+    // Check if userId already exists
+    const existingUser = await User.findOne({ userId: req.body.userId });
+    if (existingUser) {
+      return res.status(400).send({
+        message:
+          "Failed! Bad Request, userId field is already registered, Please change and try",
+      });
+    }
+
+    // Validate email
+    if (!req.body.email) {
+      return res.status(400).send({
+        message: "Failed! Bad Request, Email field is not passed or empty",
+      });
+    }
+
+    // Check if email already exists
+    const existingEmail = await User.findOne({ email: req.body.email });
+    if (existingEmail) {
+      return res.status(400).send({
+        message:
+          "Failed! Bad Request, email field is already registered, Please change and try",
+      });
+    }
+
+    // Validate userType
     const possibleUserTypes = [
       constants.userTypes.customer,
       constants.userTypes.engineer,
       constants.userTypes.admin,
     ];
-    if (req.body.userTypes && !possibleUserTypes.includes(req.body.userTypes)) {
-      res.status(400).send({
-        message: "userType passed is invalid ! .. Please correct and re-try !",
-      });
-      return;
-    }
-    // validate the password
-    if (!req.body.password) {
-      res.status(400).send({
-        message: "Failed ! Bad Request, password field is not passed or empty",
-      });
-      return;
-    }
-  } catch (err) {
-    console.log("Error while validating user", err);
-  }
 
-  next();
+    if (
+      req.body.userType &&
+      !possibleUserTypes.includes(req.body.userType)
+    ) {
+      return res.status(400).send({
+        message: "userType passed is invalid! Please correct and retry.",
+      });
+    }
+
+    // Validate password
+    if (!req.body.password) {
+      return res.status(400).send({
+        message: "Failed! Bad Request, password field is not passed or empty",
+      });
+    }
+
+    next(); // ✅ only call next() if everything is fine
+  } catch (err) {
+    console.log("Error while validating user:", err);
+    return res.status(500).send({
+      message: "Internal server error while validating user request",
+    });
+  }
 };
 
 module.exports = {
-  validateUserRequestBody : validateUserRequestBody,
-}
+  validateUserRequestBody,
+};
