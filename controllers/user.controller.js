@@ -1,5 +1,7 @@
 // This is controller files for supporting users related APIs
 
+const objectConverter = require("../utils/objectConverter");
+
 const User = require("../models/user.model");
 
 
@@ -7,6 +9,8 @@ const User = require("../models/user.model");
 
 exports.findAll = async (req, res) => {
     const users = await User.findAll();
+
+    return res.status(200).send(objectConverter(users))
 }
 
 
