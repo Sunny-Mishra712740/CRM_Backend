@@ -13,6 +13,6 @@ exports.findAll = async (req, res) => {
     return res.status(200).send(objectConverter(users))
 }
 
-function () = ()
+console.log("hello")
 
 
