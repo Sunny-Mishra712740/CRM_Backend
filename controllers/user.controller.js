@@ -16,7 +16,8 @@ exports.findAll = async (req, res) => {
 console.log("hello")
 function func(){
 console.log("Hey this is sunny");
-
 }
+
+console.log("My name is sunny mishra")
 
 
