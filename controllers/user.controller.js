@@ -10,7 +10,7 @@ const User = require("../models/user.model");
 exports.findAll = async (req, res) => {
     const users = await User.findAll();
 
-    return res.status(200).send(objectConverter(users))
+    return res.status(200).send(objectConverter(users));
 }
 
 console.log("hello")
