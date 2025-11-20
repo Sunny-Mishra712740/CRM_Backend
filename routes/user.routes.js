@@ -1,7 +1,9 @@
 const express = require("express");
 const route = express.Router();
-const authController = require("../controllers/userController");
+const userController = require("../controllers/user.controller");
 const veriftyUserReqBody = require("../middlewares/verifyUserReqBody");
 
 
-route.post("/auth/signup",[veriftyUserReqBody.validateUserRequestBody], authController.sig)
+route.get("/users", userController.findAll);
+
+module.exports = route;

@@ -40,6 +40,8 @@ async function init() {
 
 const auth_route = require("./routes/auth.routes");
 app.use("/crm/api/v1", auth_route);
+const user_route = require("./routes/user.routes")
+app.use("/crm/api/v1", user_route)
 
 
 

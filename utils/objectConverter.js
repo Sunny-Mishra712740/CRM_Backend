@@ -1,4 +1,4 @@
-exports.userResponse =  (users) => {
+exports.userResponse = (users) => {
     let userResult = [];
     users.forEach(user => {
         userResult.push({
@@ -8,5 +8,6 @@ exports.userResponse =  (users) => {
             userType : user.userType,
             userStatus : user.userStatus
         })
-    })
+    });
+    return userResult;
 }

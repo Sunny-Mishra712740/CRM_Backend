@@ -8,17 +8,9 @@ const User = require("../models/user.model");
 // Constoller for fetch all the users details
 
 exports.findAll = async (req, res) => {
-    const users = await User.findAll();
-
-    return res.status(200).send(objectConverter(users));
+    const users = await User.find();
+    console.log(users)
+    console.log(objectConverter.userResponse(users));
+    return res.status(200).send(objectConverter.userResponse(users));
 }
-
-console.log("hello")
-function func(){
-console.log("Hey this is sunny");
-}
-
-console.log("My name is sunny mishra")
-console.log("My name is kapil")
-
 
