@@ -14,3 +14,5 @@ exports.findAll = async (req, res) => {
     return res.status(200).send(objectConverter.userResponse(users));
 }
 
+console.log("Hey this is sunny")
+console.log("This is how to work with this")
