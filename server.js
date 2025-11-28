@@ -54,3 +54,7 @@ console.log(process.env.PORT)
 app.listen(PORT, () => {
     console.log(`Server is listening to the port num : ${PORT}`)
 })
+
+
+
+console.log("Hello World")
